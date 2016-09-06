@@ -163,7 +163,7 @@
     CGFloat controlX = CGRectGetMidX(self.view.frame) - controlW / 2;
     CGFloat controlY = CGRectGetMaxY(self.view.frame) - 38;
     control.frame = CGRectMake(controlX, controlY, controlW, controlH);
-    control.numberOfPages = 3;
+    control.numberOfPages = ImageArray.count;
     control.pageIndicatorTintColor = [UIColor colorWithRed:234./255. green:234./255. blue:234./255. alpha:1.];
     control.currentPageIndicatorTintColor = [UIColor colorWithRed:125./255. green:153./255. blue:255./255. alpha:1.];
     
