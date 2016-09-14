@@ -27,7 +27,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         _imageView = [[UIImageView alloc] initWithFrame:self.bounds];
-        _imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
         _imageView.userInteractionEnabled = YES;
         [self.contentView addSubview:_imageView];
     }
@@ -50,27 +50,26 @@
 - (UIButton*)removeBtn{
     //移除按钮样式
     UIButton* removeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    CGFloat btnW = 170;
-    CGFloat btnH = 46;
-    CGFloat btnX = CGRectGetMidX(self.view.frame) - btnW / 2;
-    CGFloat btnY = CGRectGetMaxY(self.view.frame) - 104;
-    removeBtn.frame = CGRectMake(btnX, btnY, btnW, btnH);
-    
-    removeBtn.layer.cornerRadius = btnH / 2;
-    removeBtn.layer.borderColor = [UIColor colorWithRed:32./255. green:210./255. blue:245./255. alpha:1.].CGColor;
-    removeBtn.layer.borderWidth = 1.;
-    
-    [removeBtn setTitle:@"立即体验" forState:UIControlStateNormal];
-    [removeBtn setTitleColor:[UIColor colorWithRed:32./255. green:210./255. blue:245./255. alpha:1.] forState:UIControlStateNormal];
-    removeBtn.titleLabel.font = [UIFont systemFontOfSize:20.];
-    
     [removeBtn addTarget:self action:@selector(removeGuidView) forControlEvents:UIControlEventTouchUpInside];
-    
     removeBtn.hidden = (self.imageArray.count != 1);
-    
     removeBtn.tag = RemoveBtn_tag;      //注意这里的tag
     
+    //***********************这里面可以自定义*******************************//
+    CGFloat btnW = 128;
+    CGFloat btnH = 35;
+    CGFloat btnX = CGRectGetMidX(self.view.frame) - btnW / 2;
+    CGFloat btnY = CGRectGetMaxY(self.view.frame) * 0.83;
+    removeBtn.frame = CGRectMake(btnX, btnY, btnW, btnH);
+    
+    removeBtn.layer.cornerRadius = 4;
+    removeBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    removeBtn.layer.borderWidth = 1.;
+    
+    [removeBtn setTitle:@"进入婚匠" forState:UIControlStateNormal];
+    [removeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    removeBtn.titleLabel.font = [UIFont systemFontOfSize:18.];
+     //********************自定义结束**********************************//
+   
     return removeBtn;
 }
 
@@ -164,8 +163,8 @@
     CGFloat controlY = CGRectGetMaxY(self.view.frame) - 38;
     control.frame = CGRectMake(controlX, controlY, controlW, controlH);
     control.numberOfPages = ImageArray.count;
-    control.pageIndicatorTintColor = [UIColor colorWithRed:234./255. green:234./255. blue:234./255. alpha:1.];
-    control.currentPageIndicatorTintColor = [UIColor colorWithRed:125./255. green:153./255. blue:255./255. alpha:1.];
+    control.pageIndicatorTintColor = pageTintColor;
+    control.currentPageIndicatorTintColor = currentTintColor;
     
     control.tag = Control_tag;
     [self.view addSubview:control];
